@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-movies-dashboard',
@@ -46,5 +47,32 @@ export class MoviesDashboardComponent implements OnInit {
   showMovieDetails(movie:any){
     console.log("Routing to details");
     this.Router.navigate(['details'],{state: movie});
+  }
+
+  getMoviesWithInput(event: any){
+    console.log(event.target.value);
+
+    setTimeout(()=>{
+      this.fetchMoviesWithSearchKey(event.target.value)
+    },1000)
+  }
+
+  fetchMoviesWithSearchKey(key:string){
+    this.http.get('http://api.tvmaze.com/search/shows', {
+      params: {
+        q: key
+      },
+      observe: 'response'
+    })
+    .subscribe((response: any) => {
+      if(response.status === 200 && response.statusText === "OK"){
+        console.log(response);
+        let movies : any = []
+        response.body?.forEach((singleMovie: any)=> {
+          movies.push({...singleMovie.score,...singleMovie.show})
+        });
+       this.filterAllGenere(movies)
+      }
+    })
   }
 }
