@@ -48,11 +48,19 @@ export class MoviesDashboardComponent implements OnInit {
     console.log("Routing to details");
     this.Router.navigate(['details'],{state: movie});
   }
-
+  
+  timer : any
   getMoviesWithInput(event: any){
+    if(!event.target.value){
+      clearTimeout(this.timer)
+      this.fetchMovies()
+      return;
+    }
     console.log(event.target.value);
-
-    setTimeout(()=>{
+    if(this.timer){
+      clearTimeout(this.timer)
+    }
+    this.timer = setTimeout(()=>{
       this.fetchMoviesWithSearchKey(event.target.value)
     },1000)
   }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MoviesDashboardComponent } from './movies-dashboard.component';
 import { Route, RouterModule, Routes } from '@angular/router';
+import { MovieCardModule } from '../movie-card/movie-card.module';
 
 const route : Routes = [
   {
@@ -14,6 +15,7 @@ const route : Routes = [
   declarations: [MoviesDashboardComponent],
   imports: [
     CommonModule,
+    MovieCardModule,
     RouterModule.forChild(route)
   ],
   exports:[MoviesDashboardComponent]

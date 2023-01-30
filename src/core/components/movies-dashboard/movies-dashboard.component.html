@@ -1,10 +1,12 @@
 <input type="text" (keyup)="getMoviesWithInput($event)" placeholder=" Search Movies Here ">
 <div *ngFor="let genere of moviesCollection" class="main">
     {{genere.genereName}}
+   
     <ng-container *ngFor="let movie of genere.speceficGenereCollection">
-        <div (click)="showMovieDetails(movie)"  style="display: inline-block">
+        <app-movie-card  [movie]="movie" ></app-movie-card>
+        <!-- <div "  style="display: inline-block">
             <img src="{{ movie.image.medium }}" alt="" />
-        </div>
+        </div> -->
     </ng-container>
    
   </div>
