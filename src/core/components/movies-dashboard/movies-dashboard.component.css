@@ -1,0 +1,15 @@
+.main {
+    display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  color: green;
+  border: 4px dashed green;
+  padding: 5px;
+  width: 400px;
+}
+
+.main div {
+  border: 2px solid red;
+  margin: 10px 20px;
+  width: 100px;
+}
